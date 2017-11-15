@@ -22,7 +22,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AjaxProvider } from '../providers/ajax/ajax';
 import { ConfigProvider } from '../providers/config/config';
 
-import { SuperTabsModule } from 'ionic2-super-tabs';
+//import { SuperTabsModule } from 'ionic2-super-tabs';
 
 
 @NgModule({
@@ -45,7 +45,7 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
     JsonpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    SuperTabsModule.forRoot()
+    //SuperTabsModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
