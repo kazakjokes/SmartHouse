@@ -1,0 +1,621 @@
+import {Http, Headers, RequestOptions} from "@angular/http";
+import 'rxjs/add/operator/map';
+import { Storage } from '@ionic/storage';
+
+@Component({
+  selector: 'page-lights',
+  templateUrl: 'lights.html',
+})
+export class LightsPage {
+  lights : any;
+  objects : any;
+  premises : any;
+  apiUrl : string;
+
+  constructor(public http: Http, storage: Storage) {
+      //this.apiUrl = 'http://192.168.2.2/sdcard/cpt/app/data_api2.php';
+
+      this.premises=[];
+/*
+      this.premises.push({
+        title: 'Didysis kambarys',
+        icon: 'monitor', //wine
+        note: '',
+        lights: [
+
+        {
+          title: 'Ambience',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliSce/Pulser0.pulse',
+              off: '/Modbus/ModbusS/DaliGro/OFG0.pulse'
+            }
+          ]
+        },
+        {
+          title: 'Valgomasis',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliSce/Pulser1.pulse',
+              off: '/Modbus/ModbusS/DaliGro/OFG1.pulse'
+            }
+          ]
+        },
+        {
+          title: 'Budinti',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliSce/Pulser2.pulse',
+              off: '/Modbus/ModbusS/DaliGro/OFG2.pulse'
+            }
+          ]
+        },
+        {
+          title: 'TV',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliSce/Pulser3.pulse',
+              off: '/Modbus/ModbusS/DaliGro/OFG3.pulse'
+            }
+          ]
+        },
+        {
+          title: 'Poilsio',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliSce/Pulser4.pulse',
+              off: '/Modbus/ModbusS/DaliGro/OFG4.pulse'
+            }
+          ]
+        },
+        {
+          title: 'Virtuali 1',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DalScCh/ONsc8.pulse',
+              off: '/Modbus/ModbusS/DaliGro/OFG8.pulse'
+            }
+          ]
+        },
+        {
+          title: 'Virtuali 2',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DalScCh/ONsc9.pulse',
+              off: '/Modbus/ModbusS/DaliGro/OFG9.pulse'
+            }
+          ]
+        },
+        {
+          title: 'Virtuali 3',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DalScCh/ONsc11.pulse',
+              off: '/Modbus/ModbusS/DaliGro/OFG11.pulse'
+            }
+          ]
+        },
+        {
+          title: 'Virtuali 4',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DalScCh/ONsc12.pulse',
+              off: '/Modbus/ModbusS/DaliGro/OFG12.pulse'
+            }
+          ]
+        },
+        {
+          title: 'Virtuali 5',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DalScCh/ONsc13.pulse',
+              off: '/Modbus/ModbusS/DaliGro/OFG13.pulse'
+            }
+          ]
+        },
+        {
+          title: 'Pastatomi TV',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliBal/ONBal0.pulse',
+              off: '/Modbus/ModbusS/DaliBal/OfBal0.pulse'
+            }
+          ]
+        },
+        {
+          title: 'Paveikslai',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliBal/ONBal2.pulse',
+              off: '/Modbus/ModbusS/DaliBal/OfBal2.pulse'
+            },
+            {
+              type: 'slider',
+              path: ''
+            }
+          ]
+        },
+        {
+          title: 'Sieniniai židinio',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliBal/ONBal6.pulse',
+              off: '/Modbus/ModbusS/DaliBal/OfBal6.pulse'
+            },
+            {
+              type: 'slider',
+              path: ''
+            }
+          ]
+        },
+        {
+          title: 'Palangių šv.',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliBal/ONBal4.pulse',
+              off: '/Modbus/ModbusS/DaliBal/OfBal4.pulse'
+            },
+            {
+              type: 'slider',
+              path: ''
+            }
+          ]
+        },
+        {
+          title: 'Pakabinamas',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliBal/ONBal12.pulse',
+              off: '/Modbus/ModbusS/DaliBal/OfBal12.pulse'
+            },
+            {
+              type: 'slider',
+              path: ''
+            }
+          ]
+        },
+        {
+          title: 'Įleidžiami poilsio',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliBal/ONBal5.pulse',
+              off: '/Modbus/ModbusS/DaliBal/OfBal5.pulse'
+            },
+            {
+              type: 'slider',
+              path: ''
+            }
+          ]
+        },
+        {
+          title: 'Įleidžiami TV',
+          objects: [
+            {
+              type: 'pulse',
+              on: '/Modbus/ModbusS/DaliBal/ONBal3.pulse',
+              off: '/Modbus/ModbusS/DaliBal/OfBal3.pulse'
+            },
+            {
+              type: 'slider',
+              path: ''
+            }
+          ]
+        }
+      ]
+      });
+
+      this.premises.push({
+        title: 'Virtuvė',
+        icon: 'restaurant',
+        note: '',
+        lights: [
+
+          {
+            title: 'Virtuvės',
+            objects: [
+              {
+                type: 'pulse',
+                on: '/Modbus/ModbusS/DaliSce/Pulser5.pulse',
+                off: '/Modbus/ModbusS/DaliGro/OFG5.pulse'
+              }
+            ]
+          },
+          {
+            title: 'Įleidžiami TV',
+            objects: [
+              {
+                type: 'pulse',
+                on: '/Modbus/ModbusS/DaliBal/ONBal9.pulse',
+                off: '/Modbus/ModbusS/DaliBal/OfBal9.pulse'
+              }
+            ]
+          },
+          {
+            title: 'Darbo zona',
+            objects: [
+              {
+                type: 'pulse',
+                on: '/Modbus/ModbusS/DaliBal/ONBal10.pulse',
+                off: '/Modbus/ModbusS/DaliBal/OfBal10.pulse'
+              }
+            ]
+          },
+          {
+            title: 'Po spintele',
+            objects: [
+              {
+                type: 'pulse',
+                on: '/Modbus/ModbusS/DaliBal/ONBal13.pulse',
+                off: '/Modbus/ModbusS/DaliBal/OfBal13.pulse'
+              }
+            ]
+          },
+          {
+            title: 'Pakabinamas',
+            objects: [
+              {
+                type: 'pulse',
+                on: '/Modbus/ModbusS/DaliBal/ONBal8.pulse',
+                off: '/Modbus/ModbusS/DaliBal/OfBal8.pulse'
+              },
+              {
+                type: 'slider',
+                path: ''
+              }
+              ]
+          }
+        ]
+        });
+
+        this.premises.push({
+          title: 'Prieškambaris',
+          icon: 'umbrella',
+          note: '',
+          lights: [
+
+          {
+            title: 'Įėjimo',
+            objects: [
+              {
+                type: 'pulse',
+                on: '/Modbus/ModbusS/DaliSce/Pulser5.pulse',
+                off: '/Modbus/ModbusS/DaliGro/OFG5.pulse'
+              }
+            ]
+          },
+          {
+            title: 'Įleidžiami',
+            objects: [
+              {
+                type: 'pulse',
+                on: '/Modbus/ModbusS/DaliBal/ONBal11.pulse',
+                off: '/Modbus/ModbusS/DaliBal/OfBal11.pulse'
+              },
+              {
+                type: 'slider',
+                path: ''
+              }
+            ]
+          },
+          {
+            title: 'Konsolės',
+            objects: [
+              {
+                type: 'pulse',
+                on: '/Modbus/ModbusS/DaliBal/ONBal7.pulse',
+                off: '/Modbus/ModbusS/DaliBal/OfBal7.pulse'
+              },
+              {
+                type: 'slider',
+                path: ''
+              }
+            ]
+          }
+
+          ]
+          });
+
+*/
+      console.log(this.premises);
+
+      this.objects = [
+          {
+
+ 'label' : 'Svetainė',
+
+ 'objects': [
+       {
+         'path':'/Modbus/ModbusS/DaliB/Balas1',
+         'label':'Toršerai'
+       },
+       {
+         'path':'/Modbus/ModbusS/DaliB/Balas2',
+         'label':'Paveikslai'
+       },
+       {
+         'path':'/BACnet/BACnetS/BACServ/B3',
+         'label':'TV zona. Įleidžiami'
+       },
+       {
+         'path':'/BACnet/BACnetS/BACServ/B4',
+         'label':'Svetainė. Palangės šviestuvai'
+       },
+       {
+         'path':'/BACnet/BACnetS/BACServ/B5',
+         'label':'Svetainė. Įleidžiami'
+       },
+       {
+         'path':'/BACnet/BACnetS/BACServ/B6',
+         'label':'Sieniniai (prie židinio)'
+       },
+       {
+         'path':'/BACnet/BACnetS/BACServ/B12',
+         'label':'Svetainė. Pakabinamas'
+       }
+
+   ]
+          }
+      ];
+
+      storage.get('ipaddress').then((val) => {
+
+        this.apiUrl = 'http://'+val+'/sdcard/cpt/app/data_api2.php';
+
+        this.getLights().then( res => {
+
+ console.log(res);
+
+
+
+   this.lights = this.assignParams(this.objects, this.parseLights(res));
+
+   console.log(this.lights);
+
+
+
+
+          }
+        );
+
+      });
+  }
+
+  assignParams (objects,params) {
+    var resultsArray = new Array();
+    var array2=params;
+
+    for (let objectsArray of objects) {
+      var array1=objectsArray.objects;
+      var result = array1.map(val => {
+          return Object.assign({}, val, array2.filter(v => v.path === val.path)[0]);
+      });
+      resultsArray.push(
+        {
+          'label': objectsArray.label,
+          'objects': result
+        }
+      );
+    }
+    return resultsArray;
+  }
+
+  createUrl (objects) {
+    var urlParams='';
+    var paramsArray = new Array();
+    for (let objectsArray of objects) {
+      for (let object of objectsArray.objects) {
+        if(object.path.length>0) {
+          //urlParams+=object.path+'.out%2B~';
+          paramsArray.push(object.path+'.out');
+        }
+      }
+    }
+    return paramsArray.join('~');
+  }
+
+  parseLights(res){
+
+    var lightsArray = [];
+    var path, name, level, toggle;
+    let params: any;
+
+
+      for (let entry of res) {
+      //console.log(entry);
+      path=entry.path;
+
+      for (let slot of entry.slots) {
+        //console.log(slot);
+
+        switch(slot.name) {
+          case "out": {
+
+ // check if it is dimmer or swithcher
+
+ if(slot.type=='bool') {
+
+   toggle=slot.value;
+
+ }
+
+ else if (slot.type=='float') {
+
+   level = Math.round(slot.value);
+
+ }
+
+ break;
+          }
+          case "status": { // or enable
+
+ toggle=slot.value;
+
+ break;
+          }
+          case "objName": {
+
+ name=slot.value;
+
+ break;
+          }
+        }
+
+      }
+
+      params={
+        'path':path,
+        'name':name,
+        'params': {
+          'level':level,
+          'toggle':toggle
+        }
+      };
+      lightsArray.push(params);
+      toggle=false;
+    }
+    return lightsArray;
+  }
+
+  getLights() {
+    return new Promise((resolve, reject) =>{
+
+
+     this.getAjax().subscribe(
+       res => {
+
+//console.log(res.response.data);
+
+resolve(res.response.data);
+       },
+       err => {
+         console.log("Whoops!" + err);
+       }
+
+   );
+
+   });
+
+  }
+
+  postAjax(params) {
+    let headers = new Headers();
+    //headers.append('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+    headers.append('Content-Type','application/json');
+    let options = new RequestOptions({ headers: headers });
+
+
+    if(params) {
+      let data=params;
+
+      console.log(data);
+
+      this.http.post(this.apiUrl, data, options)
+      .map(res => res.json())
+      .subscribe(res => {
+      console.log(res.response);
+      }, (err) => {
+      console.log("failed: "+err);
+      });
+    }
+
+
+  }
+
+  getAjax() {
+
+
+
+    var urlParams=this.createUrl(this.objects);
+    console.log(urlParams);
+
+    var url=this.apiUrl+'?url=/app/objects'+urlParams;
+    console.log(url);
+
+    // url example with slots params
+    //    var url="http://192.168.2.2/sdcard/cpt/app/data_api2.php?url=/app/objects/BACnet/BACnetS/BACServ/B3.out%2Bstatus%2BfaultCause%2Benable%2BinstanceNumber%2BobjName%2Bin16%2BrelinquishDefault%2BoutOfService~/BACnet/BACnetS/BACServ/B12.out%2Bstatus%2BfaultCause%2Benable%2BinstanceNumber%2BobjName%2Bin1%2Bin2%2Bin3%2Bin4%2Bin5%2Bin6%2Bin7%2Bin8%2Bin9%2Bin10%2Bin11%2Bin12%2Bin13%2Bin14%2Bin15%2Bin16%2BrelinquishDefault%2BoutOfService~/BACnet/BACnetS/BACServ/B4.out%2Bstatus%2BfaultCause%2Benable%2BinstanceNumber%2BobjName%2Bin1%2Bin2%2Bin3%2Bin4%2Bin5%2Bin6%2Bin7%2Bin8%2Bin9%2Bin10%2Bin11%2Bin12%2Bin13%2Bin14%2Bin15%2Bin16%2BrelinquishDefault%2BoutOfService~/BACnet/BACnetS/BACServ/B5.out%2Bstatus%2BfaultCause%2Benable%2BinstanceNumber%2BobjName%2Bin1%2Bin2%2Bin3%2Bin4%2Bin5%2Bin6%2Bin7%2Bin8%2Bin9%2Bin10%2Bin11%2Bin12%2Bin13%2Bin14%2Bin15%2Bin16%2BrelinquishDefault%2BoutOfService";
+
+    // url expample without slots params
+    //    var url="http://192.168.2.2/sdcard/cpt/app/data_api2.php?url=/app/objects/BACnet/BACnetS/BACServ/B3.out~/BACnet/BACnetS/BACServ/B4.out";
+
+    return  this.http.get(url)
+        .map(res => res.json())
+
+
+    }
+
+  lightsChange (event, item) {
+      console.log(event);
+      console.log(item);
+
+      //send different ligths postdata
+      if(event._componentName=="range") {
+        if(item.params.level) {
+
+          let data= {
+
+   'slotType': 'action',
+
+ //  'path': '/app/objects/BACnet/BACnetS/BACServ/B3.set',
+
+   'path' : '/app/objects'+item.path+'.set',
+
+   'type': 'float',
+
+   'value': item.params.level,
+          };
+
+          // if data is set then do Post request
+          if(data) {
+
+ this.postAjax(data);
+          }
+        }
+      }
+      else if (event._componentName=="toggle") {
+          //if(item.params.toggle) {
+
+ let data= {
+       'slotType': 'action',
+
+   //  'path': '/app/objects/BACnet/BACnetS/BACServ/B3.set',
+       'path' : '/app/objects'+item.path+'.set'+item.params.toggle.toString().charAt(0).toUpperCase() + item.params.toggle.toString().slice(1),
+       'type': 'void',
+       'enable': item.params.toggle,
+
+ };
+
+
+ // if data is set then do Post request
+
+ if(data) {
+
+   this.postAjax(data);
+
+ }
+          //}
+      }
+
+
+
+  }
+
+
+
+
+}

@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Šviesos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="this.lights">
+  <ion-list *ngFor="let data of this.lights; let i = index">
+    <ion-list-header>{{data.label}}</ion-list-header>
+
+    <ion-item-group *ngFor="let object of data.objects; let i = index">
+      <ion-item-divider color="light">
+          <ion-label>{{object.label}}</ion-label>
+
+          <ion-badge item-end>{{object.params.level}}</ion-badge>
+          <ion-toggle checked="false" [(ngModel)]="object.params.toggle" (ionChange)="lightsChange($event, object)"></ion-toggle>
+      </ion-item-divider>
+
+      <ion-item *ngIf="object.params.level">
+        <ion-range [(ngModel)]="object.params.level" (ionChange)="lightsChange($event, object)">
+          <ion-icon range-left small name="sunny"></ion-icon>
+          <ion-icon range-right name="sunny"></ion-icon>
+        </ion-range>
+      </ion-item>
+
+    </ion-item-group>
+  </ion-list>
+
+
+
+  </div>
+<!--
+  <ion-list *ngIf="this.lights">
+    <ion-list-header>Kambarys 1</ion-list-header>
+    <ion-item-group>
+      <ion-item-divider color="light">
+          <ion-label>Šviesos 1</ion-label>
+          <ion-badge item-end>{{this.lights.kambarys1.level}}</ion-badge>
+          <ion-toggle checked="false" [(ngModel)]="lights.kambarys1.toggle" (ionChange)="lightsChange($event, lights)"></ion-toggle>
+      </ion-item-divider>
+      <ion-item>
+        <ion-range value="75" [(ngModel)]="lights.kambarys1.level" (ionChange)="lightsChange($event, lights)">
+          <ion-icon range-left small name="sunny"></ion-icon>
+          <ion-icon range-right name="sunny"></ion-icon>
+        </ion-range>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider color="light">
+          <ion-label>Šviesos 2</ion-label>
+          <ion-badge item-end>{{this.lights.kambarys2.level}}</ion-badge>
+          <ion-toggle checked="false" [(ngModel)]="lights.kambarys2.toggle" (ionChange)="lightsChange($event, lights)"></ion-toggle>
+      </ion-item-divider>
+      <ion-item>
+        <ion-range value="75" [(ngModel)]="lights.kambarys2.level" (ionChange)="lightsChange($event, lights)">
+          <ion-icon range-left small name="sunny"></ion-icon>
+          <ion-icon range-right name="sunny"></ion-icon>
+        </ion-range>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+-->
+  <ion-list>
+    <!--
+    <ion-list-header>Kambarys 2</ion-list-header>
+    <ion-item-group>
+      <ion-item-divider color="light">
+          <ion-label>Šviesos 21</ion-label>
+          <ion-badge item-end>{{this.lights.kambarys21.level}}</ion-badge>
+          <ion-toggle checked="false"></ion-toggle>
+      </ion-item-divider>
+      <ion-item>
+        <ion-range value="75" [(ngModel)]="lights.kambarys21.level" (ionChange)="lightsChange($event, lights)">
+          <ion-icon range-left small name="sunny"></ion-icon>
+          <ion-icon range-right name="sunny"></ion-icon>
+        </ion-range>
+      </ion-item>
+    </ion-item-group>
+  -->
+  </ion-list>
+
+<!--
+<ion-list>
+    <ion-list-header>
+        Kambarys 1
+        <ion-badge item-end>{{this.lights.kambarys1}}</ion-badge>
+    </ion-list-header>
+    <ion-item>
+      <ion-range value="75" [(ngModel)]="lights.kambarys1">
+        <ion-icon range-left small name="sunny"></ion-icon>
+        <ion-icon range-right name="sunny"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Šviesos 1</ion-label>
+      <ion-toggle checked="false"></ion-toggle>
+    </ion-item>
+
+</ion-list>
+-->
+  <p>
+    <button ion-button color="primary" menuToggle>Menu</button>
+  </p>
+
+</ion-content>
