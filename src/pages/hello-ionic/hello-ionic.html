@@ -1,25 +1,78 @@
+<!--
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Hello Ionic</ion-title>
+    <ion-title>Pradžia</ion-title>
   </ion-navbar>
 </ion-header>
+-->
 
 
-<ion-content padding>
+<!--
+<ion-content  >
 
-  <h3>Welcome to your first Ionic app!</h3>
+<super-tabs scrollTabs>
+  <super-tab [root]="page1" icon="home"></super-tab>
+  <super-tab [root]="page2" icon='thermometer'></super-tab>
+  <super-tab [root]="page3" icon='bulb'></super-tab>
+  <super-tab [root]="page4" icon='color-fill'></super-tab>
+  <super-tab [root]="page5" icon='sync'></super-tab>
+</super-tabs>
 
-  <p>
-    This starter project is our way of helping you get a functional app running in record time.
-  </p>
-  <p>
-    Follow along on the tutorial section of the Ionic docs!
-  </p>
-  <p>
-    <button ion-button color="primary" menuToggle>Toggle Menu</button>
-  </p>
 
+-->
+<div style="height:100%; width:100%;" (swipe)="swipeEvent($event, this.selectedTab)">
+
+<ion-tabs #myTabs selectedIndex="{{this.selectedTab}}" (click)="onTabSelect($event)">
+  <ion-tab [root]="page1" tabIcon="home"></ion-tab>
+  <ion-tab [root]="page2" tabIcon='thermometer'></ion-tab>
+  <ion-tab [root]="page3" tabIcon='bulb'></ion-tab>
+  <ion-tab [root]="page4" tabIcon='color-fill'></ion-tab>
+  <ion-tab [root]="page5" tabIcon='sync'></ion-tab>
+</ion-tabs>
+</div>
+
+
+<!--
+<ion-slides pager color="primary">
+
+
+  <ion-slide>
+    <div *ngIf="this.all">
+    <ion-item-group>
+      <ion-item-divider color="light">
+          <ion-label>{{this.object.title}}</ion-label>
+          <ion-toggle checked="false" item-end [(ngModel)]="this.all.params.toggle.value" (ionChange)="allChange($event, this.all)"></ion-toggle>
+      </ion-item-divider>
+
+    </ion-item-group>
+    </div>
+    <p>
+      <img width="100%" src="/assets/img/bg.jpg" />
+    </p>
+    <p>
+      <button ion-button color="primary" menuToggle>Menu</button>
+
+    </p>
+  </ion-slide>
+
+  <ion-slide>
+
+    <ion-list>
+      <ion-list-header>Temperatūra patalpose</ion-list-header>
+      <button ion-item *ngFor="let item of premises" (click)="itemTapped($event, item)">
+        <ion-icon name="{{item.icon}}" item-left></ion-icon>
+        {{item.title}}
+        <ion-badge color="danger" item-end>19.0°</ion-badge>
+      </button>
+    </ion-list>
+  </ion-slide>
+
+</ion-slides>
+-->
+<!--
+  <ion-img width="100%" height="100%" src="/assets/img/bg.jpg"></ion-img>
 </ion-content>
+-->

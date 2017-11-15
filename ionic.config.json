@@ -1,5 +1,8 @@
 {
-  "name": "MyIonicProject",
-  "app_id": "",
-  "type": "ionic-angular"
+  "name": "SmartHouse",
+  "app_id": "d95e2d20",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }

@@ -14,3 +14,22 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+$range-ios-tick-background-color: #ff0000;
+
+.content {
+  background-color: color($colors, background);
+}
+
+.menu-inner ion-icon {
+      width: 20px;
+      text-align: center;
+   }
+
+.on-off-button {
+  width: 25%;
+}
+
+.tab-button .hidden {
+  display: none;
+}

@@ -1,3 +1,16 @@
 page-item-details {
+  $range-md-tick-background-color: #fff;
+  $range-md-tick-active-background-color: #ff0000;
 
+  $range-ios-tick-background-color: #ff0000;
+
+  .range-md .range-tick {
+    height: 10px;
+    top: 17px;
+    background: #222;
+  }
+
+  .range-md .range-tick-active {
+    background: #f53d3d;
+  }
 }
